@@ -1,7 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import WebFont from 'webfontloader'
+import App from './App'
 
-import App from '~/components/App'
+WebFont.load({
+	google: {
+		families: ['Poppins', 'sans-serif'],
+	},
+})
 
 ReactDOM.render(
 	<React.StrictMode>
