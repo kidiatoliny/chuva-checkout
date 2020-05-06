@@ -2,15 +2,14 @@ import React from 'react'
 import { Container } from './styles'
 import PropTypes from 'prop-types'
 
-function Button({ children, onClick, textColor, background, type }) {
-	const { height, width } = type
+function Button({ children, onClick, textColor, background, size }) {
 	return (
 		<Container
 			onClick={onClick}
 			textColor={textColor}
 			background={background}
-			height={height}
-			width={width}
+			height={size.height}
+			width={size.width}
 		>
 			{children}
 		</Container>
@@ -20,15 +19,15 @@ Button.propTypes = {
 	children: PropTypes.string,
 	textColor: PropTypes.string,
 	background: PropTypes.string,
-	type: PropTypes.object,
+	size: PropTypes.object,
 	onClick: PropTypes.func,
 }
 
 Button.defaultProps = {
 	children: '',
 	textColor: '#fff',
-	background: '#f89033',
-	type: {
+	background: '',
+	size: {
 		width: 8.4,
 		height: 3.3,
 	},

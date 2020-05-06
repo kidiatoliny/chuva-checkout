@@ -18,7 +18,7 @@ function Text({ children, type, color }) {
 }
 
 Text.propTypes = {
-	children: PropTypes.string,
+	children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 	type: PropTypes.object,
 	color: PropTypes.string,
 }

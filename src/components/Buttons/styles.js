@@ -14,7 +14,7 @@ export const Container = styled.button`
 	color: ${(props) => props.textColor};
 	width: ${(props) => props.width}rem;
 	height: ${(props) => props.height}rem;
-	padding: 0.7rem 2.6rem;
+	justify-content: center;
 	border: 0;
 	cursor: pointer;
 `

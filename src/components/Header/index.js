@@ -1,25 +1,35 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
-import { Container, InfoContainer } from './styles'
+import { Container, Contact, InfoContainer } from './styles'
+import ThemeContext from '~/context/ThemeContext'
 import Text from '../Text/index'
-import { LightTheme } from '~/config/theme/Light'
+import { PropTypes } from 'prop-types'
 
-function Header() {
-	const { colors, typografy } = LightTheme
-	const { title, info } = typografy
-	return (
-		<Container>
-			<Text type={title} color={colors.secondary}>
-				Chuva Mercado
-			</Text>
-			<InfoContainer>
-				<Text type={info} color={colors.primary}>
-					Sao Vicente - Monte Sossego
-				</Text>
-				<Text color={colors.secondary}>Tel: 977 92 01</Text>
-			</InfoContainer>
-		</Container>
-	)
+function Header({ store }) {
+	const { isLight, light, dark } = useContext(ThemeContext)
+	const theme = isLight ? light : dark
+	return store.map((store) => {
+		const { name, location, phone } = store
+		return (
+			<Container key={store.id}>
+				<InfoContainer>
+					<Text type={theme.typography.title} color={theme.colors.secondary}>
+						{name}
+					</Text>
+					<Contact>
+						<Text type={theme.typography.info} color={theme.primary}>
+							{location}
+						</Text>
+						<Text color={theme.secondary}>Tel: {phone}</Text>
+					</Contact>
+				</InfoContainer>
+			</Container>
+		)
+	})
+}
+
+Header.propTypes = {
+	store: PropTypes.array,
 }
 
 export default Header

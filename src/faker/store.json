@@ -1,0 +1,68 @@
+[
+	{
+		"id": 1,
+		"name": "Chuva Mercado",
+		"location": "Sao Vicente - Monte Sossego",
+		"phone": "977 92 01",
+
+		"products": [
+			{
+				"id": 3,
+				"image": "leite",
+				"title": "Leite Meio Gordo",
+				"description": "Leite Meio Gordo Mimosa",
+				"price": 90,
+				"unit": "kg"
+			},
+
+			{
+				"id": 4,
+				"image": "ovos",
+				"title": "ovos",
+				"description": "Pack 16 Sociave",
+				"price": 220
+			},
+			{
+				"id": 6,
+				"image": "papel",
+				"title": "Papel Higiénico",
+				"description": "Folha simples. Neutro. Com 8 rolos Personal",
+				"price": 180
+			}
+		]
+	},
+	{
+		"id": 2,
+		"name": "Chuva Mercado 2",
+		"location": "Sao Vicente - Monte Sossego",
+		"phone": "977 92 01",
+
+		"products": [
+			{
+				"id": 3,
+				"image": "leite",
+				"title": "Leite Meio Gordo 2",
+				"description": "Leite Meio Gordo Mimosa",
+				"price": 90,
+				"unit": "kg"
+			},
+
+			{
+				"id": 4,
+				"image": "ovos",
+				"title": "ovos 2",
+				"description": "Pack 16 Sociave 2",
+				"price": 220,
+				"unit": "kg"
+			},
+			{
+				"id": 6,
+				"image": "papel",
+				"title": "Papel Higiénico 2",
+				"description": "Folha simples. Neutro. Com 8 rolos Personal",
+				"price": 90,
+				"unit": "kg"
+			}
+		]
+	}
+]

@@ -41,5 +41,12 @@ const GlobalStyles = createGlobalStyle`
   select {
       appearance: none;
   }
+
+  @media screen and (max-width:413px){
+
+html{
+  font-size:50%
+}
+  }
 `
 export default GlobalStyles
