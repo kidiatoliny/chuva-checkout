@@ -35,8 +35,12 @@ function Card({ product }) {
 	}
 
 	const handleAddQuantity = (price) => {
-		if (quantity >= 0) {
+		if (quantity > 0) {
 			setQuantity(quantity + 0.25)
+			setTotal(quantity * price)
+		}
+		if (quantity === 0) {
+			setQuantity(quantity + 0.5)
 			setTotal(quantity * price)
 		}
 	}

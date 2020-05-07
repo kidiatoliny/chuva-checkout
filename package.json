@@ -6,6 +6,7 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
+		"axios": "^0.19.2",
 		"load-json-file": "^6.2.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
@@ -19,7 +20,8 @@
 	"scripts": {
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
-		"test": "react-app-rewired test"
+		"test": "react-app-rewired test",
+		"api": " nodemon src/faker/server.js"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -41,6 +43,7 @@
 		"@babel/runtime": "^7.9.6",
 		"babel-eslint": "^10.1.0",
 		"babel-plugin-root-import": "^6.5.0",
+		"cors": "^2.8.5",
 		"customize-cra": "^0.9.1",
 		"eslint": "^6.8.0",
 		"eslint-config-prettier": "^6.11.0",
@@ -48,6 +51,8 @@
 		"eslint-plugin-import": "^2.20.2",
 		"eslint-plugin-prettier": "^3.1.3",
 		"eslint-plugin-react": "^7.19.0",
+		"express": "^4.17.1",
+		"nodemon": "^2.0.3",
 		"prettier": "^2.0.5",
 		"react-app-rewired": "^2.1.6"
 	}

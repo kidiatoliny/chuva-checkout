@@ -6,28 +6,33 @@ import Text from '~/components/Text/'
 import Search from '../../components/Search'
 import ThemeContext from '~/context/ThemeContext'
 import Card from '../../components/Card'
-import stores from '~/faker/store'
-const id = 1
-const getStoreById = (id) =>
-	stores.filter((store) => {
-		if (store.id === id) return store
-		return null
-	})
+import axios from 'axios'
+const url = 'http://localhost:3333/store/1'
+
+// const getStoreById = (id) =>
+// 	stores.filter((store) => {
+// 		if (store.id === id) return store
+// 		return null
+// 	})
 
 function Store() {
 	const { isLight, light, dark } = useContext(ThemeContext)
 	const theme = isLight ? light : dark
-	const loadStore = getStoreById(id)
-	const [store] = useState(loadStore)
+	//const loadStore = getStoreById(id)
+	const [store, setStore] = useState([])
 	const [storeProducts, setStoreProducts] = useState([])
 
-	// useEffect(() => {
-	// 	setStore(loadStore)
-	// }, [store])
-
 	useEffect(() => {
-		setStoreProducts(store[0].products)
-	}, [store])
+		axios.get(url).then((res) => {
+			const store = res.data
+			setStore(store)
+			setStoreProducts(store.products)
+		})
+	}, [url])
+	console.log(store.products)
+	// useEffect(() => {
+	// 	setStoreProducts(store[0].products)
+	// }, [store])
 
 	return (
 		<Container>
