@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import { Container, Contact, InfoContainer } from './styles'
 import ThemeContext from '~/context/ThemeContext'
-import Text from '../Text/index'
+import Text from '~/components/Typography/Text/'
 import { PropTypes } from 'prop-types'
 
 function Header({ store }) {
@@ -28,7 +28,7 @@ function Header({ store }) {
 }
 
 Header.propTypes = {
-	store: PropTypes.object.isRequired,
+	store: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 }
 
 export default Header

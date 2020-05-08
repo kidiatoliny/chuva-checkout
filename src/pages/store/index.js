@@ -1,50 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react'
-
+import React, { useContext } from 'react'
+import { useSelector } from 'react-redux'
 import Header from '~components/Header'
-import { Container, Title } from './styles'
-import Text from '~/components/Text/'
+import { Container } from './styles'
+import Title from '~/components/Typography/Title'
 import Search from '../../components/Search'
 import ThemeContext from '~/context/ThemeContext'
 import Card from '../../components/Card'
-import axios from 'axios'
-const url = 'http://localhost:3333/store/1'
-
-// const getStoreById = (id) =>
-// 	stores.filter((store) => {
-// 		if (store.id === id) return store
-// 		return null
-// 	})
+import AppBar from '~/components/AppBar'
 
 function Store() {
-	const { isLight, light, dark } = useContext(ThemeContext)
-	const theme = isLight ? light : dark
-	//const loadStore = getStoreById(id)
-	const [store, setStore] = useState([])
-	const [storeProducts, setStoreProducts] = useState([])
-
-	useEffect(() => {
-		axios.get(url).then((res) => {
-			const store = res.data
-			setStore(store)
-			setStoreProducts(store.products)
-		})
-	}, [url])
-	console.log(store.products)
-	// useEffect(() => {
-	// 	setStoreProducts(store[0].products)
-	// }, [store])
+	let { isLight, light, dark } = useContext(ThemeContext)
+	let theme = isLight ? light : dark
+	let store = useSelector((state) => state.store.store)
+	let products = useSelector((state) => state.store.store.products)
 
 	return (
 		<Container>
+			<AppBar theme={theme}></AppBar>
 			<Header store={store}></Header>
-			<Title>
-				<Text color={theme.colors.primary} type={theme.typography.title}>
-					Produtos
-				</Text>
-			</Title>
+			<Title value='produtos' theme={theme} />
 			<Search placeholder='Procurar'></Search>
-			{storeProducts.map((product) => {
-				return <Card product={product} key={product.id}></Card>
+			{products.map((product) => {
+				return (
+					<Card
+						product={product}
+						key={product.id}
+						theme={theme}
+						storeId={store.id}
+					></Card>
+				)
 			})}
 		</Container>
 	)

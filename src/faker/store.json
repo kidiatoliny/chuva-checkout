@@ -20,14 +20,16 @@
 				"image": "ovos",
 				"title": "ovos",
 				"description": "Pack 16 Sociave",
-				"price": 220
+				"price": 220,
+				"unit": "un"
 			},
 			{
 				"id": 6,
 				"image": "papel",
 				"title": "Papel Higiénico",
 				"description": "Folha simples. Neutro. Com 8 rolos Personal",
-				"price": 180
+				"price": 180,
+				"unit": "un"
 			}
 		]
 	},
@@ -53,7 +55,7 @@
 				"title": "ovos 2",
 				"description": "Pack 16 Sociave 2",
 				"price": 220,
-				"unit": "kg"
+				"unit": "un"
 			},
 			{
 				"id": 6,
@@ -61,7 +63,7 @@
 				"title": "Papel Higiénico 2",
 				"description": "Folha simples. Neutro. Com 8 rolos Personal",
 				"price": 90,
-				"unit": "kg"
+				"unit": "un"
 			}
 		]
 	}

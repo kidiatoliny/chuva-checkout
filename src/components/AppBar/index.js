@@ -1,29 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
+import { PropTypes } from 'prop-types'
 import { Container, NavBar } from './styles'
 import Logo from '../Logo'
 import Button from '../Buttons/index'
-import ThemeContext from '~/context/ThemeContext'
-
-function AppBar() {
-	const { isLight, light, dark } = useContext(ThemeContext)
-	const theme = isLight ? light : dark
+import { Redirect, useLocation, Link } from 'react-router-dom'
+function AppBar({ theme }) {
 	// const { checkoutButton } = sizes
-	const handleCheckout = () => alert('text handleCheckout')
+	let [toCheckout, setToCheckout] = useState(false)
+	let location = useLocation()
+	function handleCheckout() {
+		return setToCheckout(true)
+	}
+
 	return (
-		<Container background={theme.colors.bgColor}>
-			<NavBar>
-				<Logo></Logo>
-				<Button
-					onClick={handleCheckout}
-					size={theme.sizes.checkoutButton}
-					background={theme.colors.primary}
-					disabled
-				>
-					Checkout
-				</Button>
-			</NavBar>
-		</Container>
+		<>
+			{toCheckout ? <Redirect to='/checkout' /> : null}
+			<Container background={theme.colors.bgColor}>
+				<NavBar>
+					<Link to='/'>
+						<Logo></Logo>
+					</Link>
+					{location.pathname === '/' ? (
+						<Button
+							onClick={handleCheckout}
+							size={theme.sizes.checkoutButton}
+							background={theme.colors.primary}
+						>
+							Checkout
+						</Button>
+					) : null}
+				</NavBar>
+			</Container>
+		</>
 	)
 }
 
+AppBar.propTypes = {
+	theme: PropTypes.object.isRequired,
+}
 export default AppBar

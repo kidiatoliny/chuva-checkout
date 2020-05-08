@@ -45,6 +45,7 @@ export const Price = styled.div`
 	font-weight: 600;
 	font-size: 1.2rem;
 	line-height: 1.8rem;
+	margin-top: 0.5rem;
 `
 export const Header = styled.div``
 export const Description = styled.div`

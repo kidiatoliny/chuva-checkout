@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import {
 	Container,
@@ -11,41 +12,41 @@ import {
 	Description,
 	CardActions,
 } from './styles'
-import ThemeContext from '~/context/ThemeContext'
+
 import PropTypes from 'prop-types'
-import Text from '~/components/Text'
+import Text from '~/components/Typography/Text'
 import Button from '../Buttons'
 import deleteIcon from '~/assets/delete.svg'
 import addIcon from '~/assets/add.svg'
-function Card({ product }) {
-	const { isLight, light, dark } = useContext(ThemeContext)
-	const theme = isLight ? light : dark
+import { addProductToCart } from '../../store/modules/cart/actions'
+
+function Card({ product, theme, storeId }) {
+	const dispatch = useDispatch()
+	let units = {
+		kg: 0.25,
+		un: 1,
+		l: 1,
+	}
 
 	const handleAddToChekout = () => {
-		alert('add to checkout')
-	}
-	const handleDeleteQuantity = (price) => {
-		if (quantity > 0) {
-			setQuantity(quantity - 0.25)
-			setTotal(quantity * price)
-			return
+		let productToCart = {
+			...product,
+			quantity,
+			total: product.price * quantity,
 		}
-		setQuantity(0)
-		setTotal(0)
+		dispatch(addProductToCart(storeId, productToCart))
+	}
+	const handleDeleteQuantity = () => {
+		if (quantity - units[product.unit] >= 0) {
+			setQuantity(quantity - units[product.unit])
+		}
 	}
 
-	const handleAddQuantity = (price) => {
-		if (quantity > 0) {
-			setQuantity(quantity + 0.25)
-			setTotal(quantity * price)
-		}
-		if (quantity === 0) {
-			setQuantity(quantity + 0.5)
-			setTotal(quantity * price)
-		}
+	const handleAddQuantity = () => {
+		setQuantity(quantity + units[product.unit])
 	}
-	const [quantity, setQuantity] = useState(0)
-	const [total, setTotal] = useState(0)
+	let [quantity, setQuantity] = useState(0)
+
 	return (
 		<Container>
 			{/* eslint-disable-next-line no-undef */}
@@ -82,23 +83,17 @@ function Card({ product }) {
 					<CardActions>
 						<div>
 							<span>Quantidade</span>
-							<button
-								type='button'
-								onClick={() => handleDeleteQuantity(product.price)}
-							>
+							<button type='button' onClick={() => handleDeleteQuantity()}>
 								<img src={deleteIcon} alt='remove' />
 							</button>
 							<h3>{quantity}</h3>
-							<button
-								type='button'
-								onClick={() => handleAddQuantity(product.price)}
-							>
+							<button type='button' onClick={() => handleAddQuantity()}>
 								<img src={addIcon} alt='add' />
 							</button>
 						</div>
 						<span>
 							<span>Total</span>
-							<strong>{total}</strong>
+							<strong>CVE {product.price * quantity}</strong>
 						</span>
 					</CardActions>
 				</CardInfo>
@@ -108,6 +103,7 @@ function Card({ product }) {
 }
 
 Card.propTypes = {
+	storeId: PropTypes.number.isRequired,
 	product: PropTypes.shape({
 		id: PropTypes.number.isRequired,
 		title: PropTypes.string.isRequired,
@@ -116,6 +112,10 @@ Card.propTypes = {
 		unit: PropTypes.string,
 		image: PropTypes.string.isRequired,
 	}),
+	theme: PropTypes.object.isRequired,
 }
 
+Card.propsDefault = {
+	unit: 'un',
+}
 export default Card

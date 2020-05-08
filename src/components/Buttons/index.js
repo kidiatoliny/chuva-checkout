@@ -2,7 +2,7 @@ import React from 'react'
 import { Container } from './styles'
 import PropTypes from 'prop-types'
 
-function Button({ children, onClick, textColor, background, size }) {
+function Button({ children, onClick, textColor, background, size, ...rest }) {
 	return (
 		<Container
 			onClick={onClick}
@@ -10,6 +10,7 @@ function Button({ children, onClick, textColor, background, size }) {
 			background={background}
 			height={size.height}
 			width={size.width}
+			{...rest}
 		>
 			{children}
 		</Container>

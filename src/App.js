@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
 import GlobalStyles from '~/config/GlobalStyles'
-import AppBar from '~/components/AppBar/index'
-import Store from './pages/store'
 import { Provider } from 'react-redux'
 import store from './store'
+
+import Routes from '~/routes'
+
+import { Router } from 'react-router-dom'
+import history from '~/services/history'
 
 function App() {
 	useEffect(() => {
@@ -11,9 +14,10 @@ function App() {
 	})
 	return (
 		<Provider store={store}>
-			<GlobalStyles />
-			<AppBar></AppBar>
-			<Store></Store>
+			<Router history={history}>
+				<Routes />
+				<GlobalStyles />
+			</Router>
 		</Provider>
 	)
 }
