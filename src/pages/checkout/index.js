@@ -13,13 +13,13 @@ import AppBar from '~/components/AppBar'
 function Checkout() {
 	let { isLight, light, dark } = useContext(ThemeContext)
 	let theme = isLight ? light : dark
-	let store = useSelector((state) => state.store.store)
+	let store = useSelector((state) => state.store)
 	let cart = useSelector((state) => state.cart.products)
 
 	return (
 		<Container>
 			<AppBar theme={theme}></AppBar>
-			<Header store={store}></Header>
+			<Header></Header>
 			<Title value='Checkout' theme={theme} />
 			<Cart cart={cart} theme={theme}></Cart>
 			<Title

@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
-
+import { useSelector } from 'react-redux'
 import { Container, Contact, InfoContainer } from './styles'
 import ThemeContext from '~/context/ThemeContext'
 import Text from '~/components/Typography/Text/'
 import { PropTypes } from 'prop-types'
 
-function Header({ store }) {
+function Header() {
 	const { isLight, light, dark } = useContext(ThemeContext)
 	const theme = isLight ? light : dark
-
+	let store = useSelector((state) => state.store)
 	const { id, name, location, phone } = store
 	return (
 		<Container key={id}>
