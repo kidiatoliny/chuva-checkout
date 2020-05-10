@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import {
+	ToastsContainer,
+	ToastsStore,
+	ToastsContainerPosition,
+} from 'react-toasts'
 import {
 	Container,
 	CardContainer,
@@ -19,32 +23,52 @@ import Button from '../Buttons'
 import deleteIcon from '~/assets/delete.svg'
 import addIcon from '~/assets/add.svg'
 import { addProductToCheckout } from '~/store/modules/cart'
+import {
+	isProductInCart,
+	addQuantityToProductInCart,
+	removeQuantityOffProductInCart,
+} from '~/Helpers'
 
 function Card({ product, theme }) {
-	const dispatch = useDispatch()
 	let units = {
 		kg: 0.25,
 		un: 1,
 		l: 1,
 	}
-
+	const dispatch = useDispatch()
+	const [inCart, setIncart] = useState(false)
+	const productIncart = useSelector((state) => state.cart)
+	const isInCart = isProductInCart(productIncart, product.id)
 	const handleAddToChekout = () => {
-		let productToCart = {
-			...product,
-			quantity,
-			total: product.price * quantity,
+		if (isInCart) {
+			handleAddQuantity()
+			quantity = units[product.unit]
+			setIncart(true)
+		} else {
+			setIncart(false)
 		}
-		dispatch(addProductToCheckout(productToCart))
+
+		dispatch(
+			addProductToCheckout({
+				...product,
+				quantity,
+			}),
+		)
+		ToastsStore.info(`${product.title} adicionado ao Carrinho`)
 	}
 	const handleDeleteQuantity = () => {
 		if (quantity - units[product.unit] >= 0) {
 			setQuantity(quantity - units[product.unit])
+			removeQuantityOffProductInCart(productIncart, product.id, quantity)
 		}
+		if (quantity <= units[product.unit]) setIncart(false)
 	}
 
 	const handleAddQuantity = () => {
 		setQuantity(quantity + units[product.unit])
+		addQuantityToProductInCart(productIncart, product.id, quantity)
 	}
+
 	let [quantity, setQuantity] = useState(0)
 
 	return (
@@ -70,6 +94,7 @@ function Card({ product, theme }) {
 							size={theme.sizes.addButton}
 							onClick={handleAddToChekout}
 							background={theme.colors.primary}
+							disabled={inCart}
 						>
 							Adicionar
 						</Button>
@@ -98,6 +123,10 @@ function Card({ product, theme }) {
 					</CardActions>
 				</CardInfo>
 			</CardContainer>
+			<ToastsContainer
+				store={ToastsStore}
+				position={ToastsContainerPosition.TOP_CENTER}
+			/>
 		</Container>
 	)
 }

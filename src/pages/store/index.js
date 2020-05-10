@@ -5,7 +5,7 @@ import { Container } from './styles'
 import Title from '~/components/Typography/Title'
 import Search from '../../components/Search'
 import ThemeContext from '~/context/ThemeContext'
-import Card from '../../components/Card'
+import ProductCard from '../../components/Card'
 import AppBar from '~/components/AppBar'
 import { getStore } from '~/store/modules/store/fetchActions'
 
@@ -28,12 +28,12 @@ function Store() {
 			<Search placeholder='Procurar'></Search>
 			{products.map((product) => {
 				return (
-					<Card
+					<ProductCard
 						product={product}
 						key={product.id}
 						theme={theme}
 						storeId={store.id}
-					></Card>
+					></ProductCard>
 				)
 			})}
 		</Container>

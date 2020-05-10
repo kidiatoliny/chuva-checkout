@@ -4,14 +4,16 @@ import { Container, NavBar } from './styles'
 import Logo from '../Logo'
 import Button from '../Buttons/index'
 import { Redirect, useLocation, Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 function AppBar({ theme }) {
 	// const { checkoutButton } = sizes
 	let [toCheckout, setToCheckout] = useState(false)
 	let location = useLocation()
-	function handleCheckout() {
+	function handlegoToCheckout() {
 		return setToCheckout(true)
 	}
 
+	const productsInCart = useSelector((state) => state.cart)
 	return (
 		<>
 			{toCheckout ? <Redirect to='/checkout' /> : null}
@@ -22,9 +24,10 @@ function AppBar({ theme }) {
 					</Link>
 					{location.pathname === '/' ? (
 						<Button
-							onClick={handleCheckout}
+							onClick={handlegoToCheckout}
 							size={theme.sizes.checkoutButton}
 							background={theme.colors.primary}
+							disabled={productsInCart.length === 0}
 						>
 							Checkout
 						</Button>

@@ -5,12 +5,12 @@ import PropTypes from 'prop-types'
 function Button({ children, onClick, textColor, background, size, ...rest }) {
 	return (
 		<Container
+			{...rest}
 			onClick={onClick}
 			textColor={textColor}
 			background={background}
 			height={size.height}
 			width={size.width}
-			{...rest}
 		>
 			{children}
 		</Container>
