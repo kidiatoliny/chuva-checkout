@@ -1,1 +1,0 @@
-export const LOAD_STORE_BY_ID = 'LOAD_STORE_BY_ID'

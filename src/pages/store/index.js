@@ -8,7 +8,6 @@ import ThemeContext from '~/context/ThemeContext'
 import Card from '../../components/Card'
 import AppBar from '~/components/AppBar'
 import { getStore } from '~/store/modules/store/fetchActions'
-import { getStoreProducts } from '~/store/modules/products/fetchActions'
 
 function Store() {
 	let { isLight, light, dark } = useContext(ThemeContext)
@@ -16,7 +15,7 @@ function Store() {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(getStore())
-		dispatch(getStoreProducts())
+		// dispatch(getStoreProducts())
 	}, [dispatch])
 
 	const store = useSelector((state) => state.store)

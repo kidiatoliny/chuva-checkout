@@ -28,7 +28,7 @@
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
 		"test": "react-app-rewired test",
-		"api": " nodemon src/faker/server.js"
+		"api": " nodemon src/__localApi_/server.js"
 	},
 	"eslintConfig": {
 		"extends": "react-app"

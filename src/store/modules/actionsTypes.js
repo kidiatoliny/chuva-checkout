@@ -1,0 +1,3 @@
+export const SET_STORE = 'SET_STORE'
+export const SET_PRODUCTS = 'SET_PRODUCTS'
+export const ADD_PRODUCT_TO_CHECKOUT = 'ADD_PRODUCT_TO_CHECKOUT'

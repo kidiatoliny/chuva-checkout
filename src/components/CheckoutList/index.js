@@ -6,7 +6,7 @@ import { CartList, TotalContainer, Total, Value, List } from './styles'
 import Title from '~/components/Typography/Title'
 
 export default function Cart({ cart, theme }) {
-	const { total } = cart
+	console.log(cart)
 	return (
 		<CartList>
 			<strong></strong>
@@ -26,7 +26,7 @@ export default function Cart({ cart, theme }) {
 			))}
 			<TotalContainer>
 				<Total textColor={theme.colors.primary}>total</Total>
-				<Value textColor={theme.colors.primary}>CVE {total} 354353</Value>
+				<Value textColor={theme.colors.primary}>CVE 354353</Value>
 			</TotalContainer>
 		</CartList>
 	)

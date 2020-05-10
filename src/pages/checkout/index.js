@@ -13,8 +13,7 @@ import AppBar from '~/components/AppBar'
 function Checkout() {
 	let { isLight, light, dark } = useContext(ThemeContext)
 	let theme = isLight ? light : dark
-	let store = useSelector((state) => state.store)
-	let cart = useSelector((state) => state.cart.products)
+	let cart = useSelector((state) => state.cart)
 
 	return (
 		<Container>

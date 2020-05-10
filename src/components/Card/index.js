@@ -18,9 +18,9 @@ import Text from '~/components/Typography/Text'
 import Button from '../Buttons'
 import deleteIcon from '~/assets/delete.svg'
 import addIcon from '~/assets/add.svg'
-import { addProductToCart } from '../../store/modules/cart/actions'
+import { addProductToCheckout } from '~/store/modules/cart'
 
-function Card({ product, theme, storeId }) {
+function Card({ product, theme }) {
 	const dispatch = useDispatch()
 	let units = {
 		kg: 0.25,
@@ -34,7 +34,7 @@ function Card({ product, theme, storeId }) {
 			quantity,
 			total: product.price * quantity,
 		}
-		dispatch(addProductToCart(storeId, productToCart))
+		dispatch(addProductToCheckout(productToCart))
 	}
 	const handleDeleteQuantity = () => {
 		if (quantity - units[product.unit] >= 0) {
@@ -103,7 +103,7 @@ function Card({ product, theme, storeId }) {
 }
 
 Card.propTypes = {
-	storeId: PropTypes.number.isRequired,
+	// storeId: PropTypes.number.isRequired,
 	product: PropTypes.shape({
 		id: PropTypes.number.isRequired,
 		title: PropTypes.string.isRequired,

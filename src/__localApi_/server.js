@@ -7,7 +7,7 @@ const port = 3333
 
 const fs = require('fs')
 
-let rawdata = fs.readFileSync('./src/faker/store.json')
+let rawdata = fs.readFileSync('./src/__localApi_/store.json')
 let stores = JSON.parse(rawdata)
 
 app.use(cors())
