@@ -22,12 +22,11 @@ import Text from '~/components/Typography/Text'
 import Button from '../Buttons'
 import deleteIcon from '~/assets/delete.svg'
 import addIcon from '~/assets/add.svg'
-import { addProductToCheckout } from '~/store/modules/cart'
-import {
-	isProductInCart,
-	addQuantityToProductInCart,
-	removeQuantityOffProductInCart,
-} from '~/Helpers'
+import { addMoreQuantityToProductInCart } from '~/store/modules/cart'
+import { removeQuantityOffProductInCart } from '~/helpers'
+
+import CartFactory from '~/helpers/factory/CartFactory'
+const cart = CartFactory()
 
 function Card({ product, theme }) {
 	let units = {
@@ -35,41 +34,44 @@ function Card({ product, theme }) {
 		un: 1,
 		l: 1,
 	}
-	const dispatch = useDispatch()
-	const [inCart, setIncart] = useState(false)
-	const productIncart = useSelector((state) => state.cart)
-	const isInCart = isProductInCart(productIncart, product.id)
-	const handleAddToChekout = () => {
-		if (isInCart) {
-			handleAddQuantity()
-			quantity = units[product.unit]
-			setIncart(true)
-		} else {
-			setIncart(false)
-		}
 
-		dispatch(
-			addProductToCheckout({
-				...product,
-				quantity,
-			}),
-		)
-		ToastsStore.info(`${product.title} adicionado ao Carrinho`)
+	const dispatch = useDispatch()
+
+	const [inCart, setInCart] = useState(false)
+	let [quantity, setQuantity] = useState(0)
+
+	const productIncart = useSelector((state) => state.cart)
+
+	const handleAddToChekout = () => {
+		if (!inCart) {
+			quantity > units[product.unit]
+				? (quantity = quantity)
+				: (quantity = units[product.unit])
+			cart.addToCart(dispatch, quantity, product, units)
+			setInCart(true)
+			setQuantity(quantity)
+		}
 	}
+
 	const handleDeleteQuantity = () => {
 		if (quantity - units[product.unit] >= 0) {
 			setQuantity(quantity - units[product.unit])
 			removeQuantityOffProductInCart(productIncart, product.id, quantity)
 		}
-		if (quantity <= units[product.unit]) setIncart(false)
+		if (quantity <= units[product.unit]) setInCart(false)
 	}
 
 	const handleAddQuantity = () => {
 		setQuantity(quantity + units[product.unit])
-		addQuantityToProductInCart(productIncart, product.id, quantity)
+		if (inCart) {
+			dispatch(
+				addMoreQuantityToProductInCart({
+					...product,
+					quantity: quantity + units[product.unit],
+				}),
+			)
+		}
 	}
-
-	let [quantity, setQuantity] = useState(0)
 
 	return (
 		<Container>
@@ -125,7 +127,7 @@ function Card({ product, theme }) {
 			</CardContainer>
 			<ToastsContainer
 				store={ToastsStore}
-				position={ToastsContainerPosition.TOP_CENTER}
+				position={ToastsContainerPosition.BOTTOM_CENTER}
 			/>
 		</Container>
 	)

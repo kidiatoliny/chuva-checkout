@@ -1,14 +1,10 @@
-import React, { useContext } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { Container, Contact, InfoContainer } from './styles'
-import ThemeContext from '~/context/ThemeContext'
+
 import Text from '~/components/Typography/Text/'
 import { PropTypes } from 'prop-types'
 
-function Header() {
-	const { isLight, light, dark } = useContext(ThemeContext)
-	const theme = isLight ? light : dark
-	let store = useSelector((state) => state.store)
+function Header({ theme, store }) {
 	const { id, name, location, phone } = store
 	return (
 		<Container key={id}>
@@ -28,7 +24,8 @@ function Header() {
 }
 
 Header.propTypes = {
-	store: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+	store: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+	theme: PropTypes.object.isRequired,
 }
 
 export default Header
