@@ -7,5 +7,5 @@ export const setProducts = createAction(Types.SET_PRODUCTS)
 
 //create reducer
 export default createReducer(INITIAL_STATE, {
-	[setProducts.type]: (state, action) => action.payload,
+	[setProducts.type]: (state, action) => [...action.payload],
 })

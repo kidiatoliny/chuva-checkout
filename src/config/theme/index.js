@@ -2,7 +2,7 @@ import { lightColors, darkColors } from './colors'
 import { sizes } from './sizes'
 import { typography } from './typography'
 
-const Theme = {
+export const Theme = {
 	isLight: false,
 
 	light: {
@@ -17,4 +17,4 @@ const Theme = {
 	},
 }
 
-export default Theme
+// export default Theme

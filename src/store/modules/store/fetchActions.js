@@ -2,7 +2,7 @@ import api from '~/services/api'
 import { setStore } from './../store'
 import { setProducts } from '../products'
 
-export const getStore = () => {
+export const getStoreByIdAndHisProducts = () => {
 	return async (dispatch) => {
 		const res = await api.get('/store/1')
 		try {

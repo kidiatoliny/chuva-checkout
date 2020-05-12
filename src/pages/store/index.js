@@ -7,15 +7,13 @@ import Search from '../../components/Search'
 import ThemeContext from '~/context/ThemeContext'
 import ProductCard from '../../components/Card'
 import AppBar from '~/components/AppBar'
-import { getStore } from '~/store/modules/store/fetchActions'
+import { getStoreByIdAndHisProducts } from '~/store/modules/store/fetchActions'
 
 function Store() {
-	let { isLight, light, dark } = useContext(ThemeContext)
-	let theme = isLight ? light : dark
+	let theme = useContext(ThemeContext)
 	const dispatch = useDispatch()
 	useEffect(() => {
-		dispatch(getStore())
-		// dispatch(getStoreProducts())
+		dispatch(getStoreByIdAndHisProducts())
 	}, [dispatch])
 
 	const store = useSelector((state) => state.store)
@@ -23,7 +21,7 @@ function Store() {
 	return (
 		<Container>
 			<AppBar theme={theme}></AppBar>
-			<Header store={store}></Header>
+			<Header store={store} theme={theme}></Header>
 			<Title value='produtos' theme={theme} />
 			<Search placeholder='Procurar'></Search>
 			{products.map((product) => {

@@ -7,19 +7,26 @@ import Routes from '~/routes'
 
 import { Router } from 'react-router-dom'
 import history from '~/services/history'
-import ThemeContext from './context/ThemeContext'
+
+import ThemeContext from '~/context/ThemeContext'
+import { Theme } from '~/config/theme/'
+
 function App() {
-	let { isLight, light, dark } = useContext(ThemeContext)
+	let { isLight, light, dark } = Theme
+
 	let theme = isLight ? light : dark
+
 	useEffect(() => {
 		document.title = 'Chuva Checkout'
 	})
 	return (
 		<Provider store={store}>
-			<Router history={history}>
-				<Routes />
-				<GlobalStyles bg={theme.colors.bodyBg} />
-			</Router>
+			<ThemeContext.Provider value={theme}>
+				<Router history={history}>
+					<Routes />
+					<GlobalStyles />
+				</Router>
+			</ThemeContext.Provider>
 		</Provider>
 	)
 }

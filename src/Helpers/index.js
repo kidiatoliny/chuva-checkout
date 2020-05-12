@@ -1,5 +1,7 @@
 export const isProductInCart = (cart, productId) =>
-	cart.map((product) => product.id === productId)
+	cart
+		.filter((product) => product.id === productId)
+		.map((product) => product.id)
 
 export const addQuantityToProductInCart = (cart, productId, qtd) => {
 	const product = cart
