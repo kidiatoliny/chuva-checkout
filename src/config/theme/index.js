@@ -3,7 +3,7 @@ import { sizes } from './sizes'
 import { typography } from './typography'
 
 const Theme = {
-	isLight: true,
+	isLight: false,
 
 	light: {
 		colors: lightColors,

@@ -21,8 +21,7 @@ const GlobalStyles = createGlobalStyle`
 
   html, body, #root {
     height: 100%;
-    background-color:#e5e5e5;
-
+    background-color:${(props) => props.bg};
 
   }
 
