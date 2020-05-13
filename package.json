@@ -28,7 +28,7 @@
 	"scripts": {
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
-		"test": "react-app-rewired test",
+		"test": "react-scripts test",
 		"api": " nodemon src/__localApi_/server.js"
 	},
 	"eslintConfig": {
@@ -49,6 +49,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.9.6",
 		"@babel/runtime": "^7.9.6",
+		"@types/jest": "^25.2.1",
 		"babel-eslint": "^10.1.0",
 		"babel-plugin-root-import": "^6.5.0",
 		"cors": "^2.8.5",

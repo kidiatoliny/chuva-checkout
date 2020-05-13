@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import GlobalStyles from '~/config/GlobalStyles'
 import { Provider } from 'react-redux'
 import store from './store'
@@ -24,7 +24,7 @@ function App() {
 			<ThemeContext.Provider value={theme}>
 				<Router history={history}>
 					<Routes />
-					<GlobalStyles />
+					<GlobalStyles bg={theme.colors.bodyBg} />
 				</Router>
 			</ThemeContext.Provider>
 		</Provider>

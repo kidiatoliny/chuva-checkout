@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import * as Types from '~/store/modules/actionsTypes'
+import * as Types from './../../../store/modules/actionsTypes'
 const INITIAL_STATE = []
 
 //actions and actions types

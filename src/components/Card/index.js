@@ -23,7 +23,6 @@ import Button from '../Buttons'
 import deleteIcon from '~/assets/delete.svg'
 import addIcon from '~/assets/add.svg'
 import { addMoreQuantityToProductInCart } from '~/store/modules/cart'
-import { removeQuantityOffProductInCart } from '~/helpers'
 
 import CartFactory from '~/helpers/factory/CartFactory'
 const cart = CartFactory()
@@ -45,9 +44,10 @@ function Card({ product, theme }) {
 	const handleAddToChekout = () => {
 		if (!inCart) {
 			quantity > units[product.unit]
-				? (quantity = quantity)
+				? // eslint-disable-next-line no-self-assign
+				  (quantity = quantity)
 				: (quantity = units[product.unit])
-			cart.addToCart(dispatch, quantity, product, units)
+			cart.addProduct(dispatch, quantity, product, units)
 			setInCart(true)
 			setQuantity(quantity)
 		}
@@ -56,7 +56,6 @@ function Card({ product, theme }) {
 	const handleDeleteQuantity = () => {
 		if (quantity - units[product.unit] >= 0) {
 			setQuantity(quantity - units[product.unit])
-			removeQuantityOffProductInCart(productIncart, product.id, quantity)
 		}
 		if (quantity <= units[product.unit]) setInCart(false)
 	}

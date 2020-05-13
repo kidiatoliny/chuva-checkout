@@ -1,4 +1,4 @@
-import api from '~/services/api'
+import api from './../../../services/api'
 import { setStore } from './../store'
 import { setProducts } from '../products'
 
