@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
 	ToastsContainer,
 	ToastsStore,
@@ -22,7 +22,6 @@ import Text from '~/components/Typography/Text'
 import Button from '../Buttons'
 import deleteIcon from '~/assets/delete.svg'
 import addIcon from '~/assets/add.svg'
-import { addMoreQuantityToProductInCart } from '~/store/modules/cart'
 
 import CartFactory from '~/helpers/factory/CartFactory'
 const cart = CartFactory()
@@ -39,8 +38,6 @@ function Card({ product, theme }) {
 	const [inCart, setInCart] = useState(false)
 	let [quantity, setQuantity] = useState(0)
 
-	const productIncart = useSelector((state) => state.cart)
-
 	const handleAddToChekout = () => {
 		if (!inCart) {
 			quantity > units[product.unit]
@@ -53,22 +50,21 @@ function Card({ product, theme }) {
 		}
 	}
 
-	const handleDeleteQuantity = () => {
+	const handleDeleteQuantity = async () => {
 		if (quantity - units[product.unit] >= 0) {
-			setQuantity(quantity - units[product.unit])
+			await setQuantity(quantity - units[product.unit])
+			cart.removeQuantityFromProduct(dispatch, quantity, product, units)
 		}
-		if (quantity <= units[product.unit]) setInCart(false)
+		if (quantity <= units[product.unit]) {
+			await cart.removeProduct(dispatch, product)
+			setInCart(false)
+		}
 	}
 
-	const handleAddQuantity = () => {
-		setQuantity(quantity + units[product.unit])
+	const handleAddQuantity = async () => {
+		await setQuantity(quantity + units[product.unit])
 		if (inCart) {
-			dispatch(
-				addMoreQuantityToProductInCart({
-					...product,
-					quantity: quantity + units[product.unit],
-				}),
-			)
+			cart.addMoreQuantityToProduct(dispatch, quantity, product, units)
 		}
 	}
 

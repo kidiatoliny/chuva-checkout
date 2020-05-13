@@ -11,11 +11,20 @@ export const removeProductFromCart = createAction(
 export const addMoreQuantityToProductInCart = createAction(
 	Types.ADD_QUANTITY_TO_PRODUCT_IN_CART,
 )
+export const removeQuantityOffProductInCart = createAction(
+	Types.ADD_QUANTITY_TO_PRODUCT_IN_CART,
+)
 
 export default createReducer(INITIAL_STATE, {
 	[addProductToCart.type]: (state, action) => [...state, action.payload],
+	[removeProductFromCart.type]: (state, action) =>
+		state.filter((product) => product.id !== action.payload),
 	[addMoreQuantityToProductInCart.type]: (state, action) => [
 		...state,
-		action.paylod,
+		action.payload,
+	],
+	[removeQuantityOffProductInCart.type]: (state, action) => [
+		...state,
+		action.payload,
 	],
 })
